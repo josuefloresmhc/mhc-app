@@ -9,7 +9,14 @@ accounts, no logins.
 
 ## Run it locally
 
-1. Add your API key. Copy the example env file and paste your key into it:
+1. Clone the repo:
+
+   ```bash
+   git clone https://github.com/josuefloresmhc/mhc-app.git
+   cd mhc-app
+   ```
+
+2. Add your API key. Copy the example env file and paste your key into it:
 
    ```bash
    cp .env.local.example .env.local
@@ -18,23 +25,23 @@ accounts, no logins.
    Then open `.env.local` and replace `your-key-here` with a real key from
    https://console.anthropic.com/settings/keys
 
-2. Install and start:
+3. Install and start:
 
    ```bash
    npm install
    npm run dev
    ```
 
-3. Open http://localhost:3000
+4. Open http://localhost:3000
 
 ## Deploy to Vercel (from GitHub)
 
-1. Push this folder to a new GitHub repository.
-2. Go to https://vercel.com, click **Add New → Project**, and import that repo.
-3. In the project's **Settings → Environment Variables**, add:
+1. Go to https://vercel.com, click **Add New → Project**, and import the
+   [mhc-app](https://github.com/josuefloresmhc/mhc-app) repo.
+2. In the project's **Settings → Environment Variables**, add:
    - Name: `ANTHROPIC_API_KEY`
    - Value: your Anthropic API key
-4. Click **Deploy**.
+3. Click **Deploy**.
 
 Vercel auto-detects Next.js — no extra configuration needed.
 
