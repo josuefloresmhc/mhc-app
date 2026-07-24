@@ -22,3 +22,5 @@ next-env.d.ts
 
 # editor / tooling
 /.claude
+.vercel
+.env*
