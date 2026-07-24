@@ -2,6 +2,10 @@
   "name": "mhc-app",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josuefloresmhc/mhc-app.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
