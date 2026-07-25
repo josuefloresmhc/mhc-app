@@ -6,6 +6,9 @@ html,
 body {
   margin: 0;
   padding: 0;
+  /* Safety net: nothing should ever be able to force sideways scrolling. */
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -39,6 +42,9 @@ body {
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
+  /* Long unbroken words (URLs, etc.) wrap instead of pushing the layout wide. */
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .field {
@@ -270,4 +276,184 @@ button.generate.secondary:disabled {
   gap: 2px;
   font-size: 0.8rem;
   color: #6b7280;
+}
+
+/* ---------------------------------------------------------------------
+   Mobile (phones, roughly up to a small tablet in portrait).
+   Same layout as desktop, just larger text, bigger tap targets, and more
+   breathing room, since everything already stacks in a single column.
+   --------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .container {
+    padding: 20px 14px 56px;
+  }
+
+  .header h1 {
+    font-size: 1.35rem;
+  }
+
+  .header p {
+    font-size: 0.95rem;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+
+  .paste-card h2,
+  .results h2 {
+    font-size: 1.1rem;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    /* 16px stops iOS Safari from auto-zooming in when a field is tapped. */
+    font-size: 16px;
+    padding: 12px 14px;
+  }
+
+  .field select {
+    height: 48px;
+  }
+
+  button.generate {
+    padding: 16px;
+    font-size: 1rem;
+  }
+
+  .approval-hint {
+    font-size: 0.9rem;
+  }
+
+  .approval-list li {
+    padding: 12px 0;
+  }
+
+  .approval-list label {
+    gap: 12px;
+  }
+
+  .approval-list input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+  }
+
+  .hook-list li {
+    gap: 14px;
+    padding: 12px 0;
+  }
+
+  .hook-list li::before {
+    flex: 0 0 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+
+  .avatar-row {
+    padding: 12px 0;
+  }
+
+  .avatar-row .k {
+    font-size: 0.85rem;
+  }
+
+  .industry-block-label {
+    font-size: 0.85rem;
+  }
+
+  .script-card {
+    padding: 16px 0;
+  }
+
+  .script-framework {
+    font-size: 0.8rem;
+  }
+
+  .script-meta {
+    font-size: 0.85rem;
+    gap: 4px;
+  }
+
+  .error {
+    font-size: 0.95rem;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Landing page (/)
+   --------------------------------------------------------------------- */
+.landing {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  box-sizing: border-box;
+}
+
+.landing-content {
+  max-width: 560px;
+  text-align: center;
+}
+
+.landing-content h1 {
+  font-size: 2.25rem;
+  line-height: 1.25;
+  margin: 0 0 16px;
+  color: #1a1a2e;
+}
+
+.landing-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+  margin: 0 0 32px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 16px 36px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  background: #5b5bd6;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background: #4a4ac4;
+}
+
+@media (max-width: 640px) {
+  .landing {
+    padding: 24px 16px;
+  }
+
+  .landing-content h1 {
+    font-size: 1.7rem;
+  }
+
+  .landing-content p {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.05rem;
+  }
 }
