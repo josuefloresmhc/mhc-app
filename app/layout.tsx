@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Client Avatar & Hook Bank Generator",
+  title: "Midnight Hour Content Generator",
   description:
-    "Turn client onboarding answers into a client avatar and hook bank.",
+    "Turn client onboarding answers into an avatar, hook bank, CTA bank, and a full set of video scripts.",
 };
 
 export const viewport: Viewport = {

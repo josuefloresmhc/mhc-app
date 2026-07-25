@@ -193,10 +193,11 @@ export default function Home() {
   return (
     <main className="container">
       <div className="header">
-        <h1>Client Avatar &amp; Hook Bank Generator</h1>
+        <h1>Midnight Hour Content Generator</h1>
         <p>
-          Fill in the onboarding answers below and generate a client avatar, a
-          hook bank, and a CTA bank.
+          Paste or fill in the onboarding answers below to generate a client
+          avatar, hook bank, and CTA bank, then turn the approved ones into a
+          full set of video scripts.
         </p>
       </div>
 
