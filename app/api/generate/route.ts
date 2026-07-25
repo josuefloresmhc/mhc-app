@@ -35,7 +35,8 @@ Rules:
 - Use a mix of curiosity, pain-point, and identity-based hooks.
 - "ctas" must contain 3 to 5 short strings, each anchored in ROI, identity, urgency, or certainty.
 - Write everything specifically for this client's audience and offer.
-- If industry-specific answers are provided below, use them — do not write anything generic enough to apply to any business.`;
+- If industry-specific answers are provided below, use them, do not write anything generic enough to apply to any business.
+- Never use em dashes anywhere in your output. Use a period, comma, or start a new sentence instead.`;
 
 function buildPrompt(form: Record<string, string>): string {
   const industry = getIndustry(form.industry);

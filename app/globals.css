@@ -102,6 +102,27 @@ button.generate:disabled {
   cursor: not-allowed;
 }
 
+button.generate.secondary {
+  background: #fff;
+  color: #5b5bd6;
+  border: 1px solid #5b5bd6;
+}
+
+button.generate.secondary:hover {
+  background: #f2f2fc;
+}
+
+button.generate.secondary:disabled {
+  background: #fff;
+  color: #a5a5e0;
+  border-color: #d7d7f2;
+}
+
+.paste-card h2 {
+  font-size: 1.1rem;
+  margin: 0 0 6px;
+}
+
 .error {
   background: #fdecec;
   border: 1px solid #f5b5b5;

@@ -2,48 +2,7 @@
 
 import { useState } from "react";
 import { INDUSTRIES, getIndustry } from "@/lib/industries";
-
-// The core onboarding form fields, in order. Every client answers these.
-const FIELDS: { name: string; label: string; multiline?: boolean }[] = [
-  { name: "businessName", label: "Business name" },
-  { name: "offer", label: "What do you sell or offer?", multiline: true },
-  { name: "location", label: "Where are you located?" },
-  {
-    name: "idealCustomer",
-    label: "Who is your ideal customer? Describe them as a person.",
-    multiline: true,
-  },
-  {
-    name: "problemBefore",
-    label: "What problem do they have before they find you?",
-    multiline: true,
-  },
-  {
-    name: "lifeAfter",
-    label: "What does their life look like after buying from you?",
-    multiline: true,
-  },
-  {
-    name: "objections",
-    label: "What objections do customers usually have before buying?",
-    multiline: true,
-  },
-  {
-    name: "bestSeller",
-    label: "What is your best-selling product or service right now?",
-    multiline: true,
-  },
-  {
-    name: "differentiator",
-    label: "What makes you different from competitors?",
-    multiline: true,
-  },
-  {
-    name: "callToAction",
-    label: "What do you want people to do after seeing your content?",
-    multiline: true,
-  },
-];
+import { CORE_FIELDS as FIELDS } from "@/lib/coreFields";
 
 type Avatar = {
   name: string;
@@ -100,10 +59,54 @@ export default function Home() {
   const [scriptsError, setScriptsError] = useState("");
   const [scripts, setScripts] = useState<Script[] | null>(null);
 
+  const [pasteText, setPasteText] = useState("");
+  const [parsing, setParsing] = useState(false);
+  const [parseError, setParseError] = useState("");
+  const [parseMessage, setParseMessage] = useState("");
+
   const selectedIndustry = getIndustry(form.industry);
 
   function update(name: string, value: string) {
     setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  async function onParseIntake() {
+    if (!pasteText.trim()) return;
+    setParsing(true);
+    setParseError("");
+    setParseMessage("");
+    try {
+      const res = await fetch("/api/parse-intake", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rawText: pasteText, industry: form.industry }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+      const fields = (data.fields ?? {}) as Record<string, string>;
+      let filled = 0;
+      setForm((prev) => {
+        const next = { ...prev };
+        for (const [key, value] of Object.entries(fields)) {
+          if (value && value.trim()) {
+            next[key] = value;
+            filled += 1;
+          }
+        }
+        return next;
+      });
+      setParseMessage(
+        filled > 0
+          ? `Filled ${filled} field${filled === 1 ? "" : "s"} from the pasted text. Review before generating.`
+          : "Couldn't match any fields in that text. Try pasting the full response.",
+      );
+    } catch (err) {
+      setParseError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setParsing(false);
+    }
   }
 
   function toggleHook(i: number) {
@@ -195,6 +198,42 @@ export default function Home() {
           Fill in the onboarding answers below and generate a client avatar, a
           hook bank, and a CTA bank.
         </p>
+      </div>
+
+      <div className="card paste-card">
+        <h2>Paste Client Answers</h2>
+        <p className="approval-hint">
+          Got answers back from a Google Form or email? Paste the whole thing
+          here and it&apos;ll fill in the fields below for you. Pick an
+          industry first if you want those questions filled too.
+        </p>
+        <div className="field">
+          <textarea
+            aria-label="Paste client answers"
+            value={pasteText}
+            onChange={(e) => setPasteText(e.target.value)}
+            placeholder="Paste the client's raw answers here…"
+            style={{ minHeight: 140 }}
+          />
+        </div>
+        <button
+          className="generate secondary"
+          type="button"
+          disabled={!pasteText.trim() || parsing}
+          onClick={onParseIntake}
+        >
+          {parsing ? "Reading answers…" : "Auto-fill fields from paste"}
+        </button>
+        {parseMessage && (
+          <p className="approval-hint" style={{ marginTop: 10 }}>
+            {parseMessage}
+          </p>
+        )}
+        {parseError && (
+          <div className="error" style={{ marginTop: 12 }}>
+            {parseError}
+          </div>
+        )}
       </div>
 
       <form onSubmit={onSubmit}>

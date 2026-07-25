@@ -32,12 +32,14 @@ matching this exact shape:
   "script": "the full spoken script"
 }
 
-Required mix across the ${TOTAL_SCRIPTS} scripts:
+Required mix across the ${TOTAL_SCRIPTS} scripts (these five numbers must add up to exactly ${TOTAL_SCRIPTS}, not one more or one less):
 - promo: ${DELIVERABLE_BREAKDOWN.promo}
 - educational_mindset: ${DELIVERABLE_BREAKDOWN.educational_mindset}
 - proof_testimonial: ${DELIVERABLE_BREAKDOWN.proof_testimonial}
 - authority_personal_story: ${DELIVERABLE_BREAKDOWN.authority_personal_story}
 - engagement_shareable: ${DELIVERABLE_BREAKDOWN.engagement_shareable}
+
+Before you output anything, count how many objects you have written for each framework and for the array overall. If the total is not exactly ${TOTAL_SCRIPTS}, or any single framework count is off, remove or add scripts until every number matches exactly. Do this check silently, do not show your counting in the output.
 
 Content Pyramid frameworks:
 1. Promo Video (direct offers and sales): Callout -> Pain -> Truth -> Solution -> Urgency -> CTA
