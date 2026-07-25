@@ -53,7 +53,8 @@ body {
 }
 
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
   padding: 10px 12px;
   font-size: 1rem;
@@ -62,6 +63,10 @@ body {
   border-radius: 8px;
   background: #fff;
   color: inherit;
+}
+
+.field select {
+  height: 42px;
 }
 
 .field textarea {
@@ -161,4 +166,87 @@ button.generate:disabled {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.industry-block {
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px dashed #dfe2e8;
+}
+
+.industry-block-label {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #5b5bd6;
+  margin-bottom: 12px;
+}
+
+.approval-hint {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.approval-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.approval-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eef0f3;
+}
+
+.approval-list li:last-child {
+  border-bottom: none;
+}
+
+.approval-list label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.approval-list input[type="checkbox"] {
+  margin-top: 3px;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  accent-color: #5b5bd6;
+  cursor: pointer;
+}
+
+.script-card {
+  padding: 14px 0;
+  border-bottom: 1px solid #eef0f3;
+}
+
+.script-card:last-child {
+  border-bottom: none;
+}
+
+.script-framework {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #5b5bd6;
+  margin-bottom: 6px;
+}
+
+.script-text {
+  white-space: pre-line;
+  margin-bottom: 8px;
+}
+
+.script-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.8rem;
+  color: #6b7280;
 }

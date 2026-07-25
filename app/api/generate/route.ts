@@ -1,11 +1,12 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextResponse } from "next/server";
+import { getIndustry, resolveIndustryLabel } from "@/lib/industries";
 
 // Run on the Node.js runtime (the Anthropic SDK needs it).
 export const runtime = "nodejs";
 
 const SYSTEM = `You are a marketing strategist who helps social media agencies turn
-client onboarding answers into a client avatar and a hook bank.
+client onboarding answers into a client avatar, a hook bank, and a CTA bank.
 
 You reply with ONLY a single JSON object and nothing else — no markdown, no code
 fences, no commentary. The JSON must match exactly this shape:
@@ -22,6 +23,9 @@ fences, no commentary. The JSON must match exactly this shape:
   },
   "hooks": [
     "10 short hooks, each under 15 words"
+  ],
+  "ctas": [
+    "3 to 5 short calls to action"
   ]
 }
 
@@ -29,9 +33,31 @@ Rules:
 - "hooks" must contain exactly 10 strings.
 - Each hook is short, punchy, and under 15 words.
 - Use a mix of curiosity, pain-point, and identity-based hooks.
-- Write everything specifically for this client's audience and offer.`;
+- "ctas" must contain 3 to 5 short strings, each anchored in ROI, identity, urgency, or certainty.
+- Write everything specifically for this client's audience and offer.
+- If industry-specific answers are provided below, use them — do not write anything generic enough to apply to any business.`;
 
 function buildPrompt(form: Record<string, string>): string {
+  const industry = getIndustry(form.industry);
+  const isOther = form.industry === "other";
+
+  let industryBlock = "";
+  if (industry) {
+    const lines = industry.questions
+      .map((q) => {
+        const answer = form[`industry_${q.id}`];
+        return answer ? `${q.label}\n${answer}` : null;
+      })
+      .filter(Boolean)
+      .join("\n\n");
+
+    if (lines) {
+      industryBlock = `\n\nIndustry: ${industry.label}\n\n${lines}`;
+    }
+  } else if (isOther && form.industryOther) {
+    industryBlock = `\n\nIndustry: ${resolveIndustryLabel(form.industry, form.industryOther)}`;
+  }
+
   return `Here are the client's onboarding answers:
 
 Business name: ${form.businessName}
@@ -43,9 +69,9 @@ Life after buying: ${form.lifeAfter}
 Common objections: ${form.objections}
 Best-selling product/service: ${form.bestSeller}
 What makes them different: ${form.differentiator}
-Desired action after seeing content: ${form.callToAction}
+Desired action after seeing content: ${form.callToAction}${industryBlock}
 
-Generate the client avatar and hook bank as the JSON object described above.`;
+Generate the client avatar, hook bank, and CTA bank as the JSON object described above.`;
 }
 
 // Pull the JSON object out of the model's text, tolerating stray characters.

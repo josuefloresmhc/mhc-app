@@ -10,6 +10,7 @@
 
 # misc
 .DS_Store
+build.log
 
 # env files (keep secrets out of git)
 .env
