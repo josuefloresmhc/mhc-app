@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 
 // Run on the Node.js runtime (the Stripe SDK needs it).
 export const runtime = "nodejs";
+// Every visitor needs their own fresh Checkout session — never cache this.
+export const dynamic = "force-dynamic";
 
 const PRICE_USD_CENTS = 700; // $7
 

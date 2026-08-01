@@ -4,6 +4,9 @@ import { ACCESS_COOKIE, ACCESS_WINDOW_MS, createAccessToken } from "@/lib/access
 
 // Run on the Node.js runtime (the Stripe SDK needs it).
 export const runtime = "nodejs";
+// This sets a per-person cookie — it must never be cached and replayed to
+// someone else.
+export const dynamic = "force-dynamic";
 
 // Stripe redirects the browser here after a successful checkout. We verify
 // the session actually paid, then set a signed 7-day access cookie and send
@@ -38,6 +41,7 @@ export async function GET(req: Request) {
       path: "/",
       expires: new Date(expiresAt),
     });
+    response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate");
     return response;
   } catch (err) {
     console.error(err);
