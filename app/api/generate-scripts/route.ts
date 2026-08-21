@@ -6,8 +6,8 @@ import { resolveIndustryLabel } from "@/lib/industries";
 export const runtime = "nodejs";
 
 // Canonical script breakdown, balanced across the 5 Content Pyramid
-// frameworks. This mirrors the agency's manual SOP so the app produces the
-// same mix a strategist would build by hand.
+// frameworks. This mirrors the manual SOP so the app produces the same mix
+// a strategist would build by hand.
 const DELIVERABLE_BREAKDOWN = {
   promo: 3,
   educational_mindset: 8,
@@ -19,7 +19,7 @@ const DELIVERABLE_BREAKDOWN = {
 const TOTAL_SCRIPTS = Object.values(DELIVERABLE_BREAKDOWN).reduce((a, b) => a + b, 0);
 
 const SYSTEM = `You are a marketing strategist who writes short spoken video scripts for
-social media agency clients, using the Midnight Hour Content Pyramid.
+business owners, using the Midnight Hour Content Pyramid.
 
 You reply with ONLY a single JSON array and nothing else — no markdown, no code
 fences, no commentary. The array must contain exactly ${TOTAL_SCRIPTS} objects, each
@@ -49,7 +49,7 @@ Content Pyramid frameworks:
 5. Engagement / Shareable (replies, polls, interaction): Quick Callout -> Simple Choice or Question -> Tie Back -> CTA
 
 Context lock:
-- Use ONLY the client information provided below. Do not invent new offers, prices, or claims.
+- Use ONLY the business information provided below. Do not invent new offers, prices, or claims.
 - Reuse the provided hooks and CTAs — rotate through them across the ${TOTAL_SCRIPTS} scripts, do not invent new ones.
 - If a line could apply to any business, rewrite or remove it.
 
@@ -71,7 +71,7 @@ function buildPrompt(payload: {
   hooks: string[];
   ctas: string[];
 }): string {
-  return `Client business name: ${payload.businessName}
+  return `Business name: ${payload.businessName}
 What they sell/offer: ${payload.offer}
 Industry: ${resolveIndustryLabel(payload.industry, payload.industryOther)}
 Ideal customer: ${payload.idealCustomer ?? "not specified"}

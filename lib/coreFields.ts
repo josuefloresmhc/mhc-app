@@ -1,5 +1,5 @@
-// Core onboarding form fields, in order. Every client answers these,
-// regardless of industry. Shared between the form (app/page.tsx) and the
+// Core onboarding form fields, in order. Every business owner answers these,
+// regardless of industry. Shared between the form (app/app/page.tsx) and the
 // paste-and-parse endpoint (app/api/parse-intake/route.ts) so the two never
 // drift out of sync.
 

@@ -195,25 +195,26 @@ export default function Home() {
       <div className="header">
         <h1>Midnight Hour Content Generator</h1>
         <p>
-          Paste or fill in the onboarding answers below to generate a client
-          avatar, hook bank, and CTA bank, then turn the approved ones into a
-          full set of video scripts.
+          Paste or fill in the answers below to generate a customer avatar,
+          hook bank, and CTA bank for your business, then turn the approved
+          ones into a full set of video scripts.
         </p>
       </div>
 
       <div className="card paste-card">
-        <h2>Paste Client Answers</h2>
+        <h2>Paste Your Answers</h2>
         <p className="approval-hint">
-          Got answers back from a Google Form or email? Paste the whole thing
-          here and it&apos;ll fill in the fields below for you. Pick an
-          industry first if you want those questions filled too.
+          Already written this up somewhere, like a bio, About page, or an
+          old questionnaire? Paste the whole thing here and it&apos;ll fill
+          in the fields below for you. Pick an industry first if you want
+          those questions filled too.
         </p>
         <div className="field">
           <textarea
-            aria-label="Paste client answers"
+            aria-label="Paste your answers"
             value={pasteText}
             onChange={(e) => setPasteText(e.target.value)}
-            placeholder="Paste the client's raw answers here…"
+            placeholder="Paste your raw answers here…"
             style={{ minHeight: 140 }}
           />
         </div>

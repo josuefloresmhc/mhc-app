@@ -6,9 +6,9 @@ import { getIndustry } from "@/lib/industries";
 // Run on the Node.js runtime (the Anthropic SDK needs it).
 export const runtime = "nodejs";
 
-const SYSTEM = `You extract structured answers from a client's raw onboarding
-response text (often pasted straight out of a Google Form) and map them onto
-a fixed set of fields.
+const SYSTEM = `You extract structured answers from a business owner's raw
+answer text (often pasted straight out of a Google Form or an old bio) and
+map them onto a fixed set of fields.
 
 You reply with ONLY a single JSON object and nothing else — no markdown, no
 code fences, no commentary. The object must have exactly the field names
@@ -19,8 +19,8 @@ Rules:
   the source text may not match the field order you're given.
 - If the source text doesn't contain a clear answer for a field, use an empty
   string for that field. Never invent or guess an answer.
-- Copy the client's own words. Do not summarize, rewrite, or clean up their
-  answers, just place them in the right field.
+- Copy the business owner's own words. Do not summarize, rewrite, or clean up
+  their answers, just place them in the right field.
 - Every value must be a plain string.`;
 
 function buildPrompt(
@@ -32,7 +32,7 @@ function buildPrompt(
   return `Fields to fill (key: what the field is asking):
 ${fieldList}
 
-Raw client response text to extract from:
+Raw answer text to extract from:
 """
 ${rawText}
 """
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
 
     if (!body.rawText?.trim()) {
       return NextResponse.json(
-        { error: "Paste the client's answers first." },
+        { error: "Paste your answers first." },
         { status: 400 },
       );
     }

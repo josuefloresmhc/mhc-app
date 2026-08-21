@@ -5,8 +5,8 @@ import { getIndustry, resolveIndustryLabel } from "@/lib/industries";
 // Run on the Node.js runtime (the Anthropic SDK needs it).
 export const runtime = "nodejs";
 
-const SYSTEM = `You are a marketing strategist who helps social media agencies turn
-client onboarding answers into a client avatar, a hook bank, and a CTA bank.
+const SYSTEM = `You are a marketing strategist who helps business owners turn
+answers about their own business into a customer avatar, a hook bank, and a CTA bank.
 
 You reply with ONLY a single JSON object and nothing else — no markdown, no code
 fences, no commentary. The JSON must match exactly this shape:
@@ -34,7 +34,7 @@ Rules:
 - Each hook is short, punchy, and under 15 words.
 - Use a mix of curiosity, pain-point, and identity-based hooks.
 - "ctas" must contain 3 to 5 short strings, each anchored in ROI, identity, urgency, or certainty.
-- Write everything specifically for this client's audience and offer.
+- Write everything specifically for this business's audience and offer.
 - If industry-specific answers are provided below, use them, do not write anything generic enough to apply to any business.
 - Never use em dashes anywhere in your output. Use a period, comma, or start a new sentence instead.`;
 
@@ -59,7 +59,7 @@ function buildPrompt(form: Record<string, string>): string {
     industryBlock = `\n\nIndustry: ${resolveIndustryLabel(form.industry, form.industryOther)}`;
   }
 
-  return `Here are the client's onboarding answers:
+  return `Here are the business owner's answers about their business:
 
 Business name: ${form.businessName}
 What they sell/offer: ${form.offer}
@@ -72,7 +72,7 @@ Best-selling product/service: ${form.bestSeller}
 What makes them different: ${form.differentiator}
 Desired action after seeing content: ${form.callToAction}${industryBlock}
 
-Generate the client avatar, hook bank, and CTA bank as the JSON object described above.`;
+Generate the customer avatar, hook bank, and CTA bank as the JSON object described above.`;
 }
 
 // Pull the JSON object out of the model's text, tolerating stray characters.

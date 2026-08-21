@@ -29,11 +29,12 @@ export default async function LandingPage({
   return (
     <main className="landing">
       <div className="landing-content">
-        <h1>From Client Answers to Ready-to-Film Scripts</h1>
+        <h1>From Your Business to Ready-to-Film Scripts</h1>
         <p>
-          Built for social media agencies and content strategists. Turn a
-          client&apos;s onboarding answers into an avatar, hook bank, CTA
-          bank, and a full set of video scripts, all in one place.
+          Built for business owners who want to create their own content.
+          Answer a few questions about your business and get a customer
+          avatar, hook bank, CTA bank, and a full set of video scripts, all
+          in one place.
         </p>
         {notice && <p className="landing-notice">{notice}</p>}
         <a href="/api/checkout" className="cta-button">

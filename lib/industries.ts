@@ -1,9 +1,9 @@
 // Industry add-on question blocks.
 //
-// Core onboarding questions apply to every client. These extra blocks are
-// optional and get pulled into the form based on the client's business type,
+// Core onboarding questions apply to every business. These extra blocks are
+// optional and get pulled into the form based on the owner's business type,
 // giving the model more specific context to work with when it writes the
-// avatar, hooks, CTAs, and (eventually) scripts.
+// avatar, hooks, CTAs, and scripts.
 //
 // Source of truth for this list: mhc_master_question_bank.json (industry_addons).
 
@@ -117,7 +117,7 @@ export function getIndustry(key: string | undefined | null): IndustryDef | undef
 /**
  * Resolves a human-readable industry label for prompts, covering all three
  * cases the form can produce: a known preset (key), "other" with free text
- * the client typed in, or nothing selected at all.
+ * the business owner typed in, or nothing selected at all.
  */
 export function resolveIndustryLabel(
   key: string | undefined | null,

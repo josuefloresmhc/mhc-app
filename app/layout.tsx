@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Midnight Hour Content Generator",
   description:
-    "Turn client onboarding answers into an avatar, hook bank, CTA bank, and a full set of video scripts.",
+    "Turn your business answers into a customer avatar, hook bank, CTA bank, and a full set of video scripts.",
 };
 
 export const viewport: Viewport = {
