@@ -32,10 +32,9 @@ export default async function LandingPage({
         <h1>From Your Business to Ready-to-Film Scripts</h1>
         <p>
           Built for business owners who want to create their own content.
-          Answer a few questions about your business, and we&apos;ll give
-          you a clear picture of your ideal customer, words that grab
-          attention, words that get people to buy, and a full set of video
-          scripts ready to film. All in one place.
+          Answer a few questions about your business. Get your ideal
+          customer, what to say, and full video scripts ready to film. All
+          in one place.
         </p>
         {notice && <p className="landing-notice">{notice}</p>}
         <a href="/api/checkout" className="cta-button">
