@@ -34,11 +34,11 @@ const AVATAR_ROWS: { key: keyof Avatar; label: string }[] = [
 ];
 
 const FRAMEWORK_LABELS: Record<string, string> = {
-  promo: "Promo",
-  educational_mindset: "Educational / Mindset",
-  proof_testimonial: "Proof / Testimonial",
-  authority_personal_story: "Authority / Personal Story",
-  engagement_shareable: "Engagement / Shareable",
+  promo: "Sales Pitch",
+  educational_mindset: "Teach Something",
+  proof_testimonial: "Customer Win",
+  authority_personal_story: "Your Story",
+  engagement_shareable: "Quick Question",
 };
 
 const emptyForm = Object.fromEntries(FIELDS.map((f) => [f.name, ""]));
@@ -195,9 +195,10 @@ export default function Home() {
       <div className="header">
         <h1>Midnight Hour Content Generator</h1>
         <p>
-          Paste or fill in the answers below to generate a customer avatar,
-          hook bank, and CTA bank for your business, then turn the approved
-          ones into a full set of video scripts.
+          Paste or fill in the answers below and we&apos;ll figure out who
+          your customer is, give you words that grab attention and words
+          that get people to buy, then turn the ones you approve into a
+          full set of video scripts.
         </p>
       </div>
 
@@ -330,7 +331,7 @@ export default function Home() {
       {result && (
         <div className="results" style={{ marginTop: 24 }}>
           <div className="card">
-            <h2>Avatar Profile</h2>
+            <h2>Your Ideal Customer</h2>
             {AVATAR_ROWS.map((row) => (
               <div className="avatar-row" key={row.key}>
                 <div className="k">{row.label}</div>
@@ -340,7 +341,7 @@ export default function Home() {
           </div>
 
           <div className="card">
-            <h2>Hook Bank</h2>
+            <h2>Opening Lines</h2>
             <p className="approval-hint">
               Uncheck anything you don&apos;t want carried into the scripts.
             </p>
@@ -361,7 +362,7 @@ export default function Home() {
           </div>
 
           <div className="card">
-            <h2>CTA Bank</h2>
+            <h2>Closing Lines</h2>
             <p className="approval-hint">
               Uncheck anything you don&apos;t want carried into the scripts.
             </p>
@@ -389,13 +390,13 @@ export default function Home() {
           >
             {scriptsLoading
               ? "Writing scripts…"
-              : `Generate Scripts from ${approvedHooks.size} hook${
+              : `Generate Scripts from ${approvedHooks.size} Opening Line${
                   approvedHooks.size === 1 ? "" : "s"
-                } + ${approvedCtas.size} CTA${approvedCtas.size === 1 ? "" : "s"}`}
+                } + ${approvedCtas.size} Closing Line${approvedCtas.size === 1 ? "" : "s"}`}
           </button>
           {!canGenerateScripts && (
             <p className="approval-hint" style={{ marginTop: 8 }}>
-              Approve at least one hook and one CTA to generate scripts.
+              Approve at least one opening line and one closing line to generate scripts.
             </p>
           )}
         </div>
@@ -417,8 +418,8 @@ export default function Home() {
               </div>
               <div className="script-text">{s.script}</div>
               <div className="script-meta">
-                <span>Hook: {s.hookUsed}</span>
-                <span>CTA: {s.ctaUsed}</span>
+                <span>Opens with: {s.hookUsed}</span>
+                <span>Closes with: {s.ctaUsed}</span>
               </div>
             </div>
           ))}

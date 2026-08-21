@@ -35,7 +35,7 @@ export async function GET(req: Request) {
             product_data: {
               name: "Midnight Hour Content Generator — 7-Day Access",
               description:
-                "Unlimited use of the customer avatar, hook bank, CTA bank, and script generator for 7 days.",
+                "Unlimited use for 7 days: find your ideal customer, get words that grab attention and get people to buy, and generate full video scripts.",
             },
           },
         },
